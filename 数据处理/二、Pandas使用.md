@@ -1,7 +1,5 @@
 Pandas 可以是基于 NumPy 构建的含有更高级数据结构和分析能力的工具包。
 
-
-
 #### 数据结构：Series 和 DataFrame
 
 **Series 是个定长的字典序列**。说是定长是因为在存储的时候，相当于两个 ndarray，这也是和字典结构最大的不同。因为在字典的结构里，元素的个数是不固定的。
@@ -17,7 +15,6 @@ x1 = Series([1,2,3,4])
 x2 = Series(data=[1,2,3,4], index = ['a','b','c','d'])
 print(x1)
 print(x2)
-
 ```
 
 输出结果为：
@@ -55,12 +52,10 @@ d    4
 dtype: int64
 ```
 
-
-
 **DataFrame 类型数据结构类似数据库表**
 
 - 它包括了行索引和列索引，我们可以将 DataFrame 看成是由相同索引的 Series 组成的字典类型
-
+  
   ```python
   data = {'Chinese': [66, 95, 93, 90,80],'English': [65, 85, 92, 88, 90],'Math': [30, 98, 96, 77, 90]}
   df1  = DataFrame(data)
@@ -86,8 +81,6 @@ Caocao         90       88    77
 Liuqing        80       90    90
 ```
 
-
-
 #### 数据导入和输出：
 
 Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 xlsx, csv 等文件。
@@ -99,8 +92,6 @@ score = DataFrame(pd.read_excel('data.xlsx'))
 score.to_excel('data1.xlsx')
 print score
 ```
-
-
 
 #### 数据清洗:
 
@@ -116,8 +107,6 @@ df2 = df2.drop(columns=['Chinese'])
 df2 = df2.drop(index=['ZhangFei'])
 ```
 
-
-
 **2、重命名列名 columns，让列表名更容易识别**
 
 如果想对 DataFrame 中的 columns 进行重命名，可以使用 rename(columns=new_names, inplace=True) 函数:
@@ -126,8 +115,6 @@ df2 = df2.drop(index=['ZhangFei'])
 df2.rename(columns={'Chinese': 'YuWen', 'English': 'Yingyu'}, inplace = True)
 ```
 
-
-
 **3、去重复值**
 
 使用 drop_duplicates() 就会自动把重复的行去掉:
@@ -135,8 +122,6 @@ df2.rename(columns={'Chinese': 'YuWen', 'English': 'Yingyu'}, inplace = True)
 ```python
 df = df.drop_duplicates() #去除重复行
 ```
-
-
 
 **4、格式问题**
 
@@ -148,8 +133,6 @@ df = df.drop_duplicates() #去除重复行
 df2['Chinese'].astype('str') 
 df2['Chinese'].astype(np.int64) 
 ```
-
-
 
 **数据间的空格**
 
@@ -170,8 +153,6 @@ df2['Chinese']=df2['Chinese'].map(str.rstrip)
 df2['Chinese']=df2['Chinese'].str.strip('$')
 ```
 
-
-
 **大小写转换**
 
 直接使用 upper(), lower(), title() 函数，方法如下：
@@ -185,8 +166,6 @@ df2.columns = df2.columns.str.lower()
 df2.columns = df2.columns.str.title()
 ```
 
-
-
 **查找空值**
 
 使用 Pandas 中的 isnull 函数进行查找空值。
@@ -198,8 +177,6 @@ df2.columns = df2.columns.str.title()
 如果我想知道哪列存在空值，可以使用 df.isnull().any():
 
 ![img](./images/89cb71afc4f54a11ce1d4d05cd46bb03.png)
-
-
 
 **使用 apply 函数对数据进行清洗：**
 
@@ -217,13 +194,9 @@ def double_df(x):
 df1[u'语文'] = df1[u'语文'].apply(double_df)
 ```
 
-
-
 #### 数据统计：
 
 ![img](./images/343ba98c1322dc0c013e07c87b157a00.png)
-
-
 
 **数据表合并**
 
@@ -246,8 +219,6 @@ df3 = pd.merge(df1, df2, on='name')
 1    GuanYu      1      1
 ```
 
-
-
 **2、inner 内连接:**
 
 inner 内链接是 merge 合并的默认情况，inner 内连接其实也就是键的交集，在这里 df1, df2 相同的键是 name，所以是基于 name 字段做的连接：
@@ -263,8 +234,6 @@ df3 = pd.merge(df1, df2, how='inner')
 0  ZhangFei      0      0
 1    GuanYu      1      1
 ```
-
-
 
 **3、left 左连接:**
 
@@ -286,8 +255,6 @@ print(df3)
 4         c      4    NaN
 ```
 
-
-
 **4、right 右连接:**
 
 右连接是以第二个 DataFrame 为主进行的连接，第一个 DataFrame 作为补充：
@@ -307,8 +274,6 @@ print(df3)
 3         B    NaN      3
 4         C    NaN      4
 ```
-
-
 
 **5、outer 外连接:**
 
@@ -333,8 +298,6 @@ print(df3)
 7         C    NaN    4.0
 ```
 
-
-
 #### 如何用 SQL 方式打开 Pandas
 
 Pandas 的 DataFrame 数据类型可以让我们像处理数据表一样进行操作，比如数据表的增删改查，都可以用 Pandas 工具来完成。
@@ -358,9 +321,6 @@ print(pysqldf(sql))
 0  ZhangFei      0
 ```
 
-
-
 #### 总结：
 
 ![img](./images/74884960677548b08acdc919c13460cd.png)
-
